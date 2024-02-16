@@ -1,5 +1,4 @@
 import { AppBar,Box, Button, Container,Grid, Toolbar, Typography } from '@mui/material';
-import { Outlet } from "react-router-dom";
 
 function MyAppBar() {
   return (
@@ -16,8 +15,8 @@ function MyAppBar() {
           <Grid item>
           <Box sx={{ mr: 1, display: 'flex', alignItems: 'center' }}>
               <img src='/favicon-doctor.png' alt="Header Doctor Logo" width={35} height={25} />          
-              <Box sx={{ml:1 }}> <Typography color="red" fontWeight="bold" variant="h4">HEADER</Typography></Box>
-              <Typography variant="h4" fontWeight="" color='primary'>DOCTOR</Typography>
+              <Box sx={{ml:1 }}> <Typography  color='red.main' fontWeight="bold" variant="h4">HEADER</Typography></Box>
+              <Typography variant="h4" color='primary'>DOCTOR</Typography>
           </Box>
 
           </Grid>
@@ -28,7 +27,6 @@ function MyAppBar() {
           </Toolbar>
         </Container>
       </AppBar>
-      <Outlet />
     </>
   );
 }

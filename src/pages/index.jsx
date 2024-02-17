@@ -1,15 +1,15 @@
 import { useState} from 'react'
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import LoadingButton from '@mui/lab/LoadingButton'
 import { LoadingButton } from '@mui/lab';
 import toast from 'react-hot-toast'
-import { Box, List, ListItemText, ListItem, Grid, FormControlLabel, CircularProgress ,  Typography, TextField, Checkbox } from "@mui/material"
+import { Box, Button, List, ListItemText, ListItem, Grid, FormControlLabel,  Typography, TextField, Checkbox } from "@mui/material"
 import { postData } from '../http.js'
 
 function Home() {
   const title = 'Headers Checkups'
   const subtitle = "Analyze the configuration of your site's headers to detect vulnerabilities and improve security."
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const [domain, setDomain ] = useState('')
   const [presents, setPresent ] = useState([])
@@ -58,7 +58,6 @@ function Home() {
 
       return regexDomain.test(ipOrDomain)              
 
-
     }
 
 
@@ -84,12 +83,9 @@ function Home() {
             labelPlacement="start"
           />
         </Grid>
-        <Grid container xs='12' lg='10' sx={{pr:1 }}>
-          <Typography color='black' variant='h6'> Analyzing host: {domain}  </Typography>
-          {loading && <CircularProgress size={20} sx={{m:1}} />}
-        </Grid> 
         {presents.length > 0 &&
-          <Grid item xs='12' lg='10' sx={{pr:1}}>
+          <Grid item xs='12' lg='10' sx={{pr:1}}>7
+          <Button onClick={()=> navigate('/detail',{state: {domainDetail: domain}})} >Detail</Button>
             <List>
               <Typography color='primary' variant='h5'> Present Headers </Typography>
               {presents.map((present, index) => (

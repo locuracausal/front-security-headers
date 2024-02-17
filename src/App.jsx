@@ -1,7 +1,7 @@
 import AppBar from './components/AppBar'
 import { Toaster } from 'react-hot-toast'
 import Home from './pages/index'
-import Home2 from './pages/home2'
+import Detail from './pages/detail'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -46,7 +46,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />}/>
-          <Route path='/home2' element={<Home2 />}/>
+          <Route path='/detail' element={<Detail />}/>
         </Routes>
       </BrowserRouter>
 

@@ -1,51 +1,54 @@
 import { useState, useEffect} from 'react'
-import { useLocation, /* other hooks */ } from 'react-router-dom'; 
+import { useLocation, useNavigate} from 'react-router-dom'; 
 import CardHeaderDetail from "../components/CardHeaderDetail";
-import {  Grid, CircularProgress ,  Typography } from "@mui/material"
+import TableHeaders from "../components/TableHeaders";
+import { Button, Grid, CircularProgress ,  Typography } from "@mui/material"
 import { postData } from '../http.js'
 
 function Detail() {
   const [loading, setLoading] = useState(true)
-  const [domain, setDomain] = useState('')
-  const { state } = useLocation();
+  // const [domain, setDomain] = useState('')
+  const [analyzedHeaders, setAnalyzedHeaders] = useState([])
+  const { state } = useLocation()
   const { domainDetail } = state
-  setDomain(domainDetail)
-  console.log(state);
-  const header1 = {
-    "header": "content-security-policy-report-only",
-    "_type": "finding",
-    "ftype": "nonce_length",
-    "severity": "INFO",
-    "directive": "script-src",
-    "url": "https://www.google.com",
-    "value": "'nonce-t4ZyE-7ZS4JDd0LaelN04Q'",
-    "description": "Nonces should only use the base64 charset."
-  }
+  console.log(state)
+  const navigate = useNavigate()
+
   useEffect(() => {
-    if(domain !== ''){
+    if(domainDetail !== ''){
     setLoading(true)  
-    postData('/security_headers/', {url:domain})
+    postData('/security_headers/', {url:domainDetail})
       .then((res) => {
         console.log('Res security', res)
+        setAnalyzedHeaders(res.map((header, index ) => ({id: index, ...header})))
       })
-      .catch(err => console.log('Error call'))
-      .finally(()=> )
+      .catch(err => console.log('Error call', err))
+      .finally(()=> setLoading(false))
     console.log('Use effect')}
-  },[domain])
+  },[domainDetail])
 
   return (
     <>
-      <Grid container  justifyItems={'flex-start'}  sx={{pr:1 }}> 
-        <Grid container sx={{m:2}} flexDirection={'row'} >
-          <Typography color='black' variant='h6'> Analyzing host: {domain}  </Typography>
-          {loading && <CircularProgress size={20} sx={{m:1}} />}
+      <Grid container flexDirection={'row'} justifyContent={'start'}  sx={{pr:1 }}> 
+        <Grid container sx={{maxWidth:1200, m:3}}>
+          <Grid item sx={{m:2}} flexDirection={'row'} >
+            <Typography color='black' variant='h6'> Analyzing host: {domainDetail}  </Typography>
+            {loading && <CircularProgress size={20} sx={{m:1}} />}
+          </Grid>
+        <Grid container sx={{m:1}} flexDirection={'row'} >
+          <Button sx={{ml:1}} color="info"  onClick={() => navigate('/')}>  Take a new checkup </Button>
         </Grid>
-       
-        <Grid item lg='6'>
-          <CardHeaderDetail headerBody={header1}/>
+          
+          <TableHeaders headers={analyzedHeaders} />
         </Grid>
+        
+        {false && analyzedHeaders.map((header, index )=>
+          <Grid item lg='12' key={index} sx={{p:1}}>
+            <CardHeaderDetail headerBody={header}/>
+          </Grid> 
+          ) }
       </Grid> 
-    </>
+    </> 
   );
 }
 

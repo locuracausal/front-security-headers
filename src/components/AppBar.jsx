@@ -3,7 +3,7 @@ import { AppBar,Box, Button, Container,Grid, Toolbar, Typography } from '@mui/ma
 function MyAppBar() {
   return (
     <>
-      <AppBar color='white' position="fixed"  >
+      <AppBar color='white' elevation={0} position="fixed"  >
         <Container > 
           <Toolbar>
           <Grid
@@ -21,7 +21,7 @@ function MyAppBar() {
 
           </Grid>
           <Box sx={{m:2}}>
-            <Button variant='contained' color='primary'> <Box sx={{p:1}}>API</Box></Button>
+            <Button variant='contained' color='primary' onClick={()=> { window.open(import.meta.env.VITE_API_DOMAIN + '/docs', '_blank')}}> <Box sx={{p:1}}>API</Box></Button>
           </Box>
             </Grid>
           </Toolbar>

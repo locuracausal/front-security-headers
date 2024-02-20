@@ -2,6 +2,7 @@ import AppBar from './components/AppBar'
 import { Toaster } from 'react-hot-toast'
 import Home from './pages/index'
 import Detail from './pages/detail'
+import Summary from './pages/summary'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -15,7 +16,7 @@ function App() {
 
   const theme = createTheme({
     shape: {
-      borderRadius: 0,
+      // borderRadius: 0,
     },
     palette: {
       primary: {
@@ -47,6 +48,7 @@ function App() {
         <Routes>
           <Route index element={<Home />}/>
           <Route path='/detail' element={<Detail />}/>
+          <Route path='/summary' element={<Summary />}/>
         </Routes>
       </BrowserRouter>
 

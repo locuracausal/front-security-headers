@@ -1,19 +1,25 @@
-import { Card, CardContent, CardHeader, Grid, Typography } from "@mui/material"
+import { Card,Box, CardContent, Grid, ListItem, Typography } from "@mui/material"
 
 const ListItemHeader = ({text, value}) => {
 
     return (
         <>
-            <Grid item xs='2' sx={{border:"ActiveBorder"}}>
+            <ListItem item xs='12' sx={{ display:'flex', alignSelf:'start' }}>
                 <Typography fontWeight={'bold'}>
                     {text} :
                 </Typography>
-            </Grid>
-            <Grid item xs='10'>
+                {/* <Box sx={{m:1}}>
                 <Typography variant="caption" >
                     {value}
                 </Typography>
-            </Grid>
+                </Box> */}
+                
+            </ListItem>
+            <ListItem item xs='12'sx={{ display:'flex', alignSelf:'start' }}>
+                <Typography variant="caption" >
+                    {value}
+                </Typography>
+            </ListItem>
         </>
     )
 } 
@@ -28,7 +34,7 @@ export default  function CardHeaderDetail ({headerBody})  {
                 <Grid
                  container  
                  direction="row"
-                 justifyContent="space-between"
+                 justifyContent="start"
                  alignItems="center">
                     <ListItemHeader text={'Header'} value={header}/>
                     <ListItemHeader text={'Type'} value={_type}/>

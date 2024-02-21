@@ -67,24 +67,8 @@ function Home() {
       });
     else{
       setLoading(true)
-      // setPresent([])
-      // setMissing([])
       navigate('summary', {state: {domainDetail: domain}})
     }
-      // postData('/sh_check/', {url: domain})
-      //   .then(res => {
-      //      console.log('Present headers: ', Object.keys(res.present).map(key => ({header:key, value: res.present[key]}))) 
-      //       // setPresent(Object.keys(res.present).map(key => ({header:key, value: res.present[key]})))
-      //       // setMissing(res.missing)
-
-      //       toast.success('The analysis was successfully completed',{duration:4000})
-      //       console.log('Response Sh Check :',res)})
-      //     .catch(err => {
-      //       toast.error(err.message ,{duration:4000})
-      //       console.log('Error desde test domain function', err)
-      //     })
-      //     .finally(() => setLoading(false))
-      //   }
   }
 
   const validateDomain = (ipOrDomain) => {
@@ -107,9 +91,9 @@ function Home() {
                 <Typography color="primary" fontWeight='bold' variant='h4'>{title}</Typography>
                 <h2 >{subtitle}</h2>
             </Grid>
-
-            <Grid item xs='12' lg='5' sx={{pr:1, mt:2}}>
-                <TextField id="outlined-basic" fullWidth label="Hostname or IP address" variant="outlined" onChange={(e) => setDomain(e.target.value)} />
+            <Grid item xs='12' lg='5' sx={{pr:1, mt:2, display:'flex', flexDirection:'row', alignItems:'center'}}>
+                <Box sx={{m:1}}><Typography color="black" variant='h6'>https://</Typography></Box>
+                <TextField id="outlined-basic" fullWidth label="Hostname" variant="outlined" onChange={(e) => setDomain(e.target.value)} />
             </Grid>
             <Grid item xs='12' lg='3' sx={{mt:2}}>
                 <LoadingButton color='red' loading={loading} fullWidth variant="contained" onClick={testDomain}><Box sx={{p:1}}>Checkup</Box></LoadingButton>
@@ -122,34 +106,6 @@ function Home() {
                 labelPlacement="start"
               />
             </Grid>
-            {/* {presents.length > 0 &&
-              <Grid item xs='12' lg='10' sx={{pr:1}}>7
-              <Button onClick={()=> navigate('/detail',{state: {domainDetail: domain}})} >Detail</Button>
-                <List>
-                  <Typography color='primary' variant='h5'> Present Headers </Typography>
-                  {presents.map((present, index) => (
-                    <ListItem  key={index} sx={{ background: index%2 === 1 ? '#f0fdf4' : '#dcfce7'}}>
-                      <ListItemText ><Typography variant='caption' color='black'>{present.header} : {present.value}  </Typography> </ListItemText>
-                    </ListItem>
-
-                    )) }
-                </List>
-                  
-              </Grid>
-            }
-            {missings.length > 0 &&
-              <Grid item xs='12' lg='10' sx={{pr:1}}>
-                <List>
-                  <Typography color='red.main' variant='h5'> Missing Headers </Typography>
-                  {missings.map((missing, index) => (
-                    <ListItem  key={index} sx={{ background: index%2 === 0 ? '#f05654' : '#ff5654'}}>
-                      <ListItemText ><Typography variant='caption' color='black'>{missing} </Typography> </ListItemText>
-                    </ListItem>
-                    )) }
-                </List>
-                  
-              </Grid>
-            } */}
             
 
             
@@ -168,7 +124,7 @@ function Home() {
           <Grid xs='12' container>
           {lastSitesHeadersTest.map((site, index) => 
               <Box sx={{m:1}} className='border-button' key={index}>
-                <Button className='border-button' size='small' color="info" onClick={() => navigate('detail', {state:{detailDomain: site}})} variant="outlined">{site}</Button>
+                <Button className='border-button' size='small' color="info" onClick={() => navigate('summary', {state:{domainDetail: site}})} variant="outlined">{site}</Button>
               </Box>
               
             
